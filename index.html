@@ -124,89 +124,11 @@
 
       <div class="body-wrap">
   
-    <article id="post-JavaScript预热" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/13/JavaScript预热/" class="article-date">
-  	<time datetime="2016-01-13T12:41:54.000Z" itemprop="datePublished">2016-01-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: JavaScript 预热</p>
-<p>date:  </p>
-<h2 id="tags_3A"><a href="#tags_3A" class="headerlink" title="tags:"></a>tags:</h2><h2 id="JavaScript_u7B80_u4ECB"><a href="#JavaScript_u7B80_u4ECB" class="headerlink" title="JavaScript简介"></a>JavaScript简介</h2><p>大概在1992年,一家称作 Nombas的公司开发了一种叫做C减减(C-minus-minus,简称Cmm)的嵌入式脚本语言.Cmm背后的理念很简单:一个足够强大可以替代宏操作(macro)的脚本语言,同时保持与C(和C++)足够的相似性,以便开发人员能很快学会.Nombas最终把Cmm名字改为ScriptEase.<br><br>在Netscape Navigator2.0即将正式发布前,Netscape 将其更名为 JavaScript,目的是为了利用Java这个因特网时髦词汇.Netscape的赌注最终得到回报,JavaScript从此变成了因特网的必备组件.</p>
-<h2 id="JS_u4E2D_u7684_u57FA_u672C_u6570_u636E_u7C7B_u578B"><a href="#JS_u4E2D_u7684_u57FA_u672C_u6570_u636E_u7C7B_u578B" class="headerlink" title="JS中的基本数据类型"></a>JS中的基本数据类型</h2><p>JS中的变量是弱类型的,这与Java和C不同,变量的类型无特定的类型,定义变量时只用var运算符,就可以将变量初始化任意类型值.<br><br>例子:</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> num1</span> = <span class="number">10</span>; <span class="comment">//整型</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> num2</span> = <span class="number">5.0</span>;  <span class="comment">//实型</span></span><br><span class="line">	<span class="variable"><span class="keyword">var</span> str</span> = <span class="string">"字符串"</span>; <span class="comment">//字符串</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>Undefined 类型</li>
-</ul>
-<p>Undefined类型只有一个值,即undefined.当声明的变量未初始化时,该变量的默认值是undefined.</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Null 类型</li>
-</ul>
-<p>Null类型只有一个专属值null.值undefined实际上是从值null派生来的,因此它们被定义为相等的.</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="literal">null</span> == <span class="literal">undefined</span>); <span class="comment">//输出ture</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>Boolean 类型</li>
-</ul>
-<p>Boolean有两个值true和false.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> isTrue1</span> = ture;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> isTrue2</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Number 类型</li>
-</ul>
-<p>这种类型是比较特殊的数据类型.这种类型既可以表示32位的整数,还可以表示64位的浮点数.直接输入的任何数字都被看做Number类型.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> a</span> = <span class="number">10</span>;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> b</span> = <span class="number">0.5</span>;</span><br></pre></td></tr></table></figure>
-<p>另外整数也可以被表示为八进制或者十六进制的数.八进制数的首字母必须为0,其后的数字可以是任何八进制数字(0-7).</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = <span class="number">012</span>;  <span class="comment">//十进制的 10</span></span><br></pre></td></tr></table></figure>
-<p>对于十六进制,必须以0x开头,然后是任意的十六进制数字(0-9和A-F).字母可以是大写也可以是小写.</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = <span class="number">0x20</span>; <span class="comment">//十进制:32</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = <span class="number">0xAB</span>; <span class="comment">//十进制: 171</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>String 类型</li>
-</ul>
-<p>String类型一直在编程语言中都是比较有意思的类型,在JS中也是,它是唯一没有固定大小的原始类型.可以用字符串存储0或者更多的Unicode字符.<br>另外字符串中每一个字符都有特定的位置.首字符从位置0开始,往后依次类推.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> str</span> = <span class="string">"NZXLH"</span>;  <span class="comment">//单双引号都是可以的 'NZXLH'</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://ww2.sinaimg.cn/large/005H5abHgw1ezy47rf5wqj30pu088wfz.jpg" alt="字符串位置"></p>
-<p>本文只是JS的预热,之后会持续更新更加详细的JS知识.<br>更多关注:</p>
-<p><img src="http://ww2.sinaimg.cn/large/005H5abHgw1ezy4muzlhkj30by0by3yv.jpg" alt="二维码"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-HTML5 历史" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/01/13/HTML5 历史/" class="article-date">
-  	<time datetime="2016-01-13T12:41:16.000Z" itemprop="datePublished">2016-01-13</time>
+  	<time datetime="2016-01-13T12:44:03.000Z" itemprop="datePublished">2016-01-13</time>
 </a>
     </div>
   
@@ -215,11 +137,21 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/13/HTML5 历史/">HTML5概述</a>
+    </h1>
+    <p>这是一株神奇的物种.</p>
+  
+
+      </header>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: HTML5概述 </p>
-<p>date:  </p>
-<h2 id="tags_3A"><a href="#tags_3A" class="headerlink" title="tags:"></a>tags:</h2><ul>
+        <ul>
 <li>HTML5历史</li>
 </ul>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML5发源于World Wide Web Consortium(简称W3C),是Web标准的一种.它是在2004年8月W3C关于Web应用程序以及复合文档(Compound Documents)的研讨会上诞生的,但是HTML5的的发展却没有W3C的参与,初始W3C并不是赞成HTML5而是比较推崇XHTML、XForms、SVG、以及SMIL.这是一件有意思的一件事,HTML5的发展可以说是站在W3C的竞争立场上进行发展,主要是一些浏览器厂商(Safari、Opera等)组成的WHATWG(Web Hypertext Applications Technology Working Group)社区以及HTML社区共同决定了HTML5.</p>
@@ -257,6 +189,94 @@
 <p><img src="http://ww3.sinaimg.cn/large/005H5abHgw1ezwz6zxeqtj31kw0zkn07.jpg" alt="Hello World"></p>
 <p>每一段HTML5代码都会以一句<code>&lt;!DOCTYPE html&gt;</code>作为开端.如果你有使用HTML之前的经验,你会发现代码被简化了!对于HTML5主要由head和body中组成,我们在body中进行内容的布局,在head中进行风格样式的控制.</p>
 <p><a href="#">更多信息关注:</a><br><img src="http://ww2.sinaimg.cn/large/005H5abHgw1ezx0kib610j30by0by754.jpg" alt="微信号"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-JavaScript预热" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/13/JavaScript预热/" class="article-date">
+  	<time datetime="2016-01-13T12:43:52.000Z" itemprop="datePublished">2016-01-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/13/JavaScript预热/">JavaScript 预热</a>
+    </h1>
+    <p>这是一株神奇的物种.</p>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="JavaScript_u7B80_u4ECB"><a href="#JavaScript_u7B80_u4ECB" class="headerlink" title="JavaScript简介"></a>JavaScript简介</h2><p>大概在1992年,一家称作 Nombas的公司开发了一种叫做C减减(C-minus-minus,简称Cmm)的嵌入式脚本语言.Cmm背后的理念很简单:一个足够强大可以替代宏操作(macro)的脚本语言,同时保持与C(和C++)足够的相似性,以便开发人员能很快学会.Nombas最终把Cmm名字改为ScriptEase.<br><br>在Netscape Navigator2.0即将正式发布前,Netscape 将其更名为 JavaScript,目的是为了利用Java这个因特网时髦词汇.Netscape的赌注最终得到回报,JavaScript从此变成了因特网的必备组件.</p>
+<h2 id="JS_u4E2D_u7684_u57FA_u672C_u6570_u636E_u7C7B_u578B"><a href="#JS_u4E2D_u7684_u57FA_u672C_u6570_u636E_u7C7B_u578B" class="headerlink" title="JS中的基本数据类型"></a>JS中的基本数据类型</h2><p>JS中的变量是弱类型的,这与Java和C不同,变量的类型无特定的类型,定义变量时只用var运算符,就可以将变量初始化任意类型值.<br><br>例子:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> num1</span> = <span class="number">10</span>; <span class="comment">//整型</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> num2</span> = <span class="number">5.0</span>;  <span class="comment">//实型</span></span><br><span class="line">	<span class="variable"><span class="keyword">var</span> str</span> = <span class="string">"字符串"</span>; <span class="comment">//字符串</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Undefined 类型</li>
+</ul>
+<p>Undefined类型只有一个值,即undefined.当声明的变量未初始化时,该变量的默认值是undefined.</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Null 类型</li>
+</ul>
+<p>Null类型只有一个专属值null.值undefined实际上是从值null派生来的,因此它们被定义为相等的.</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="literal">null</span> == <span class="literal">undefined</span>); <span class="comment">//输出ture</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Boolean 类型</li>
+</ul>
+<p>Boolean有两个值true和false.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> isTrue1</span> = ture;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> isTrue2</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Number 类型</li>
+</ul>
+<p>这种类型是比较特殊的数据类型.这种类型既可以表示32位的整数,还可以表示64位的浮点数.直接输入的任何数字都被看做Number类型.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> a</span> = <span class="number">10</span>;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> b</span> = <span class="number">0.5</span>;</span><br></pre></td></tr></table></figure>
+<p>另外整数也可以被表示为八进制或者十六进制的数.八进制数的首字母必须为0,其后的数字可以是任何八进制数字(0-7).</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = <span class="number">012</span>;  <span class="comment">//十进制的 10</span></span><br></pre></td></tr></table></figure>
+<p>对于十六进制,必须以0x开头,然后是任意的十六进制数字(0-9和A-F).字母可以是大写也可以是小写.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = <span class="number">0x20</span>; <span class="comment">//十进制:32</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">num</span> = <span class="number">0xAB</span>; <span class="comment">//十进制: 171</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>String 类型</li>
+</ul>
+<p>String类型一直在编程语言中都是比较有意思的类型,在JS中也是,它是唯一没有固定大小的原始类型.可以用字符串存储0或者更多的Unicode字符.<br>另外字符串中每一个字符都有特定的位置.首字符从位置0开始,往后依次类推.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> str</span> = <span class="string">"NZXLH"</span>;  <span class="comment">//单双引号都是可以的 'NZXLH'</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/005H5abHgw1ezy47rf5wqj30pu088wfz.jpg" alt="字符串位置"></p>
+<p>本文只是JS的预热,之后会持续更新更加详细的JS知识.<br>更多关注:</p>
+<p><img src="http://ww2.sinaimg.cn/large/005H5abHgw1ezy4muzlhkj30by0by3yv.jpg" alt="二维码"></p>
 
       
     </div>
