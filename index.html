@@ -64,7 +64,7 @@
     <article id="post-JavaScript语法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/01/14/JavaScript语法/" class="article-date">
-  <time datetime="2016-01-14T13:53:19.000Z" itemprop="datePublished">2016-01-14</time>
+  <time datetime="2016-01-14T13:56:13.000Z" itemprop="datePublished">2016-01-14</time>
 </a>
     
   </div>
@@ -83,14 +83,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>补:</strong><br>上期在进行第一波JS预热忘记告知JS代码写在什么地方了,这里简单说下JavaScript代码可以直接嵌在网页的任何地方,不过通常我们都把JavaScript代码放到<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;</span><br></pre></td></tr></table></figure></p>
-<p><html><br> <head><br> <!--JS代码放在script中--><br>  <script><br>    alert(‘Hello, world’);   //弹出警示框显示Hello, world<br>  </script><br> </head><br> <body><br>  …<br> </body></html></p>
- <!--JS代码放在script中-->
-  <script>
-    alert('Hello, world');  
-  </script>
+        <p><strong>补:</strong><br>上期在进行第一波JS预热忘记告知JS代码写在什么地方了,这里简单说下JavaScript代码可以直接嵌在网页的任何地方,不过通常我们都把JavaScript代码放到<figure class="highlight"><figcaption><span>标签中,位置在head中或者body下,如下:</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;</span><br></pre></td></tr></table></figure></p>
+<html><br> <head><br> <!--JS代码放在script中--><br>  <script><br>    alert(‘Hello, world’);   //弹出警示框显示Hello, world<br>  </script><br> </head><br> <body><br>  …<br> </body><br><br> <!--JS代码放在script中--><br>  <script><br>    alert(‘Hello, world’);<br>  </script><br><br></html>
 
-<p><br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这样大家就可以进行JS代码的练习了,下面我们来进行JS的第二波预热,我们首先来接着看JS中的类型,除了五种基本数据类型还有其他的类型.例如数组,对象,还有函数类型.另外我们在看下JS中的流程控制.</span><br><span class="line"></span><br><span class="line"><span class="header">数组</span><br><span class="line">--</span></span><br><span class="line">数组是一组按照顺序排列的集合,集合的每个值成为元素.JavaScript的数组可以包括任意数据类型,例如:</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这样大家就可以进行JS代码的练习了,下面我们来进行JS的第二波预热,我们首先来接着看JS中的类型,除了五种基本数据类型还有其他的类型.例如数组,对象,还有函数类型.另外我们在看下JS中的流程控制.</span><br><span class="line"></span><br><span class="line"><span class="header">数组</span><br><span class="line">--</span></span><br><span class="line">数组是一组按照顺序排列的集合,集合的每个值成为元素.JavaScript的数组可以包括任意数据类型,例如:</span><br></pre></td></tr></table></figure>
 <pre><code>var arr = [10,0.5,&quot;西兰花&quot;,null,ture];
 </code></pre><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">上述数组arr包含<span class="number">5</span>个元素,元素之间用<span class="string">","</span>隔开.&lt;br&gt;</span><br><span class="line">另外一种创建数组的方法是通过Array()实现:</span><br><span class="line"></span><br><span class="line">`<span class="javascript"></span>``<span class="javascript">	</span><br><span class="line">	<span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>,<span class="number">0.5</span>,<span class="string">"西兰花"</span>, <span class="literal">null</span>, <span class="literal">true</span>);</span></span><br></pre></td></tr></table></figure>
 <p>数组的元素是各自的位置,我们可以通过 变量名 + [下标] 的方式进行数组元素的访问,例如对于arr:</p>
@@ -143,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/14/JavaScript语法/" data-id="cijebgwnn0003bil0ybhkcm27" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/14/JavaScript语法/" data-id="cijebj1ff0003ejl09jlnbwlm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/14/JavaScript预热/" data-id="cijebgwnm0002bil0o4nxqupi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/14/JavaScript预热/" data-id="cijebj1fd0002ejl094qzoyqh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/08/hello-world/" data-id="cijebgwn70000bil0mvnwnayq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/08/hello-world/" data-id="cijebj1ex0000ejl0o4jrcfvr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/01/div和span/" data-id="cijebgwnj0001bil0p0810993" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/01/div和span/" data-id="cijebj1f60001ejl00dznloa1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -374,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/20/HTML5 历史/" data-id="cijebgwno0004bil0xan3fb9x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/20/HTML5 历史/" data-id="cijebj1fg0004ejl0nt1i2ei1" class="article-share-link">Share</a>
       
       
     </footer>
