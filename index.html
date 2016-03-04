@@ -61,10 +61,378 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JS的面相对象编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/04/JS的面相对象编程/" class="article-date">
+  <time datetime="2016-03-04T06:40:21.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/04/JS的面相对象编程/">JS的面向对象编程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u7C7B_u7684_u5B9A_u4E49"><a href="#u7C7B_u7684_u5B9A_u4E49" class="headerlink" title="类的定义"></a>类的定义</h2><p>一般的面向对象语言比如Java、C++、OC等都是有类Class,定义类再通过类创建对象.例如Java中:</p>
+<blockquote>
+<p>//定义Person类<br><br>public class Person{</p>
+<p>   String _name;<br><br>   String _sex;</p>
+<p>   public Person(String name , String sex){</p>
+<p>   _name = name;<br><br>   _sex  = sex;     </p>
+<p>}</p>
+<p>   public void say(){</p>
+<p>   System.out.println(“我是” + _name + “你们好啊!”);</p>
+<p>}</p>
+<p>}</p>
+<p>//实例化Person 对象<br><br>Person per = new Person(“张三”,”男”);</p>
+<p>//打招呼<br><br>per.say();</p>
+</blockquote>
+<p>但是对于JavaScript没有Class,在JavaScript中是用函数来充当类.也就是说JavaScript中的函数有两个作用:1.当做普通函数使用;2.当做类来使用,在充当类的时候,我们又称之为构造函数.例如:</p>
+<blockquote>
+<p>//普通函数<br><br>function sayHi(){</p>
+<p>   alert(“hi,你们好啊!”);</p>
+<p>}</p>
+<p>//调用函数<br><br>sayHi();</p>
+<p>//构造函数(类)<br>function Person(name){</p>
+<p>   this.name = name;</p>
+<p>   this.sayHi = function(){</p>
+<p>   alert(“我是” + this.name + “你们好啊!”);</p>
+<p>}</p>
+<p>}</p>
+<p>//构造函数实例化对象<br><br>var per = new Person(“张三”);</p>
+<p>//对象调用方法<br><br>per.sayHi();</p>
+</blockquote>
+<p>当函数作为普通函数使用时,通常使用函数名+”()”进行函数的调用.而作为构造函数(类)使用时,通常使用 new + 构造函数名 + “()”进行对象的实例化.另外,我们习惯上将构造函数的函数名首字母大写.<br><br>再后头看下Java中的类和对象的使用,我们发现JavaScript 和 Java 两者只是类的定义方式上有些差异.<br></p>
+<h2 id="u539F_u578B"><a href="#u539F_u578B" class="headerlink" title="原型"></a>原型</h2><p>JavaScript是基于原型的语言,通过new实例化出来的对象,其属性和行为来自于两个部分,一部分来自于构造函数,另一部分来自于原型.那么什么是原型?<br><br>当我们声明一个类时,其实同时生成了一个对应的原型,例如我们定义Person这个类时,会产生一个与Person类对应的原型,通过prototype可以指向这个原型,原型可以通过constructor指向Person类(构造函数).</p>
+<blockquote>
+<p>//定义学生类的构造函数<br><br>function Student(name){</p>
+<p>   this.name = name;</p>
+<p>   …</p>
+<p>}</p>
+<p>var stu = new Student(“张三”);<br><br>//a 指向Student类对应的原型<br><br>var a = Student.prototype; </p>
+<p>//b指向a对应的类的构造函数<br><br>var b = a.constructor;</p>
+</blockquote>
+<p>当new Student()的时候,返回的Studnet实例会结合构造函数中定义的属性和方法、原型中的属性和方法,生成最终的属于Student实例的属性和方法.但是需要注意的是,构造函数中定义的属性和方法的优先级要比原型中的要高;也就是说如果构造函数和原型中定义了同名的属性或者活动,构造函数中的属性或者方法会覆盖原型中的属性或者方法.</p>
+<p>原型的使用实例:</p>
+<blockquote>
+<p>//定义Person类 <br><br>function Person(){</p>
+<p>}</p>
+<p>//修改Person的原型<br>Person.prototype={</p>
+<p>   name:”张三”,<br><br>   sex:”男”,<br><br>   say : function(){</p>
+<p>   alert(“我是:” + name + “”);<br><br>}</p>
+<p>}</p>
+</blockquote>
+<p>原型是一个hash对象,所以我们也可以把它写成代码清单的形式:</p>
+<blockquote>
+<p>//修改Person类的原型<br><br>Person.prototype.name = “李四”;<br><br>Person.prototype.sex = “女”<br><br>Person.prototype.say = function(){</p>
+<p>   alert(“你好啊”);</p>
+<p>}</p>
+</blockquote>
+<p>一般来说,我们习惯上把属性放在构造函数里,而不是放在原型里,方便从构造函数里接收参数,例如:</p>
+<blockquote>
+<p>//定义Person类 放入函数中<br><br>function Person(name){</p>
+<p>   this.name = name;    </p>
+<p>}</p>
+<p>//修改原型<br><br>Person.prototype = {</p>
+<p>   say:function(){</p>
+<p>   alert(this.name);<br>}</p>
+<p>}</p>
+<p><strong>注意:不管是构造函数中的this,还是原型中的this都是指向实例对象</strong></p>
+</blockquote>
+<h2 id="u516C_u6709_u548C_u79C1_u6709"><a href="#u516C_u6709_u548C_u79C1_u6709" class="headerlink" title="公有和私有"></a>公有和私有</h2><p>javascript不像其他面向对象语言会有public、protected、private等关键字进行公有和私有的区分,是通过作用域实现的.例如:</p>
+<blockquote>
+<p>//定义Person类<br><br>function Person(name,sex){</p>
+<p>//公有属性<br><br>   this.name = name;<br><br>   this.sex = sex;</p>
+<p>//私有属性<br><br>   var age = 20;</p>
+<p>//公有方法<br><br>this.sayHi = function (){</p>
+<p>   alert(“hello!”);<br>}    </p>
+<p>//私有的方法<br><br>var skill = function(){</p>
+<p>   alert(“我有超级必杀技!”);<br>}</p>
+<p>}</p>
+<p>//实例化对象<br><br>var per = new Person(“张三”,”男”);</p>
+<p>alert(per.name);  //张三<br><br>alert(per.age);   //undefined <br><br>per.sayHi();      //hello!<br>per.skill();      //报错 per.skill is not a function</p>
+</blockquote>
+<p>其实,在构造函数或者原型中使用this.xxx定义的属性是公有的,而用var xxx定义的属性是私有的.那么对于私有的属性或者方法怎么去访问呢?我们使用公有的方法去访问私有的属性或者方法. 比如对于私有的属性我们会通过set方法和get方法进行属性的访问.</p>
+<blockquote>
+<p>//比如对上面的Person类,我们是无法从外界访问到私有的变量age的<br><br>//我们可以实现一个公有的方法<br><br>function Person(name,sex){</p>
+<p>//公有属性<br><br>   this.name = name;<br>   this.sex = sex;</p>
+<p>//私有属性<br><br>   var _age = 20;</p>
+<p>//公有的方法<br><br>//set方法<br>this.setAge = function(age){</p>
+<p>//判定年龄是否合法<br><br>   if(age &lt; 0){</p>
+<p>   alert(“年龄不合法!”);</p>
+<p>} else {</p>
+<p>   _age = age;</p>
+<p>}</p>
+<p>}</p>
+<p>//get方法</p>
+<p>this.getAge = function(){</p>
+<p>   return _age;</p>
+<p>}<br>}</p>
+</blockquote>
+<p>set方法也可以帮我们解决我们需要监听属性变化的问题.</p>
+<blockquote>
+<pre><code>function Student(name,age){
+
+    //私有的属性
+    var _name = name;
+    var _age = age;
+    this.setName = function(name){
+        _name = name;
+
+        //触发方法
+        this.changeHandler(&quot;name&quot;);
+    }
+    this.getName = function(){
+        return _name;
+    }
+
+    this.setAge = function(age){
+        _age = age;
+
+        //触发方法
+        this.changeHandler(&quot;age&quot;);
+    }
+    this.getAge = function(){
+        return _age;
+    }
+
+}
+
+Student.prototype = {
+    //注册监听方法
+    registFunction:function(valueName,func){
+        //添加对应的属性  为监听列表
+        this[valueName + &quot;ChangeHandler&quot;] = this[valueName +&quot;ChangeHandler&quot;] || [];
+        //将监听的对应方法 放入监听列表中
+        this[valueName+&quot;ChangeHandler&quot;].push(func);
+    },
+    changeHandler : function(valueName){
+
+        //获取对应的监听属性列表
+        var methods = this[valueName + &quot;ChangeHandler&quot;];
+        //遍历对应的属性监听列表
+        if (methods){
+
+            for(var i = 0, n = methods.length; i &lt; n ; i++){
+                //调用属性监听方法
+                methods[i]();
+            }
+        }
+
+    }
+}
+
+//创建实例对象
+var stu = new Student(&quot;张三&quot;,&quot;20&quot;);
+
+//注册监听方法
+stu.registFunction(&quot;name&quot;,function(){
+
+    alert(&quot;改变姓名&quot;);
+});
+//触发方法
+stu.setName(&quot;李四&quot;);
+</code></pre></blockquote>
+<h2 id="u7EE7_u627F"><a href="#u7EE7_u627F" class="headerlink" title="继承"></a>继承</h2><p>对于传统的面向对象语言都会提供extend之类的方法用于处理类的继承,但JavaScript并不提供extend方法,在JavaScript中使用继承需要点技巧.<br><strong>注:JavaScript中继承主要分成两个部分,构造函数和原型</strong><br>还以Person和Student为例:</p>
+<blockquote>
+<pre><code>//Person类        
+function Person(name) {
+    this.name = name;
+    this.say = function() {
+        alert(&quot;Hello&quot;);
+    }
+}
+//原型
+Person.prototype = {
+        run: function() {
+            alert(&quot;run!&quot;);
+        }
+    }
+    //学生类
+    //构造函数的继承
+function Student(name) {
+    //通过call确定this
+    Person.call(this, name);
+}
+//原型继承
+Student.prototype = new Person();
+Student.prototype.constructor = Student;
+//实例化学生对象
+var stu = new Student(&quot;张三&quot;);
+alert(stu.name);
+stu.say();  //Hello
+stu.run();  //run
+</code></pre></blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/04/JS的面相对象编程/" data-id="cildc0p8v0006m1l0nxn742tp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面相对象编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/04/面相对象编程/" class="article-date">
+  <time datetime="2016-03-04T06:39:29.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/04/面相对象编程/">从javascript 再看面向对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u9762_u5411_u8FC7_u7A0B_u7F16_u7A0B_u548C_u9762_u5411_u5BF9_u8C61_u7F16_u7A0B"><a href="#u9762_u5411_u8FC7_u7A0B_u7F16_u7A0B_u548C_u9762_u5411_u5BF9_u8C61_u7F16_u7A0B" class="headerlink" title="面向过程编程和面向对象编程"></a>面向过程编程和面向对象编程</h2><p>面向过程的思维方式就是典型的计算机思维方式:输入数据给处理器,处理器内部执行,处理器返回结果.这样的思维方式很好理解,就是一步一步去完成任务.在我们进行开发时我们只需要进行对应功能的函数实现和调用即可,但是这样会造成一些问题:</p>
+<blockquote>
+<p>1.我们的工作量会非常大,因为我们不仅需要需要关心数据还需要关心处理数据的函数.并且数据和数据之间的内在联系.</p>
+<p>2.数据和处理函数没有共有和私有之分,在程序中交错在一起,耦合性很高,任何一个处理函数和数据的更改都有可能关联到其他地方,牵一发而动全身,从而加大了修改的难度.</p>
+<p>3.因为在生活中,存在的都是一个个具体的事物(对象),我们已经习惯生活中解决问题的思维方式,当工程项目庞大的时候我们更希望以我们习惯的方式去解决.</p>
+</blockquote>
+<p>那什么是面向对象编程呢?面向对象编程就是抛开计算机思维,使用生活中的思维方式进行的编程方式.生活中,每一件事物都有自己的状态和行为.比如,一个人他有姓名,性别,年龄等等静态特征;他能吃,能跑,能说话…等等动态行为.我们陌生人见面,会自我介绍;熟人相见会互相打招呼.而这些特征和行为不会因为不打招呼而不存在.这就是生活中具体人的对象.但是如果以面向过程语言我们很难描述.因为面向过程是在描述一个个动作,有动作的起点,也有动作的终点.可我们对象是一个客观存在事物,没有起点,没有终点.另外,每一个人都会有自己的秘密,即数据的私有性.</p>
+<p>对于两种编程方式,有一个经典比喻:面向过程编程程序的耦合关系就像是一个老旧的半导体收音机,整个收音机线路错综复杂地交织在一起,形成一个不可分割的整体,如果哪一个部分坏了,整个收音机就报废了;面向对象编程程序的耦合关系就像是一台先进的计算机,计算机由一系列的零件组装而成,有硬盘、内存、屏幕、声卡等,每个零件都是相互独立的,通过接口连接在一起形成一个整体,那一部分坏了,只需要更换对应的零件,其他零件可以不受影响.</p>
+<p>我们来看一个例子:(张三打招呼)</p>
+<p>面向过程编程</p>
+<blockquote>
+<p>var name = “zhangSan”;</p>
+<p>var sayHello = function(name){</p>
+<p>   alert(“我是”+name+”,你们好啊”);</p>
+<p>   }</p>
+<p>sayHello(name);   //我是zhangSan,你们好啊</p>
+<p>var sayEat = function(){</p>
+<p>   alert(“我在吃饭!”);   </p>
+<p>  }</p>
+<p>sayEat(); //我在吃饭!</p>
+</blockquote>
+<p>面向对象</p>
+<blockquote>
+<p>var zhangSan = {</p>
+<p>  name:”zhangSan”,</p>
+<pre><code>sayHello:function(){
+</code></pre><p>  alert(“我是”+this.name+”,你们好啊!”);</p>
+<p>  }</p>
+<p>  eat:function(){</p>
+<p>   alert(“我在吃饭!”);</p>
+<p>   },</p>
+<p>}</p>
+<p>zhangSan.sayHello();    //我是zhangSan,你们好啊</p>
+<p>zhangSan.eat();       //我在吃饭!</p>
+</blockquote>
+<p>在我们程序中这样描述面向过程编程和面向对象编程:</p>
+<blockquote>
+<p>面向过程编程:注重解决问题的步骤,分析问题需要的每一步,实现函数依次调用.<br><br>面向对象编程:注重问题中的的对象,分析问题中对象的联系,实现对象间的通讯解决问题.</p>
+</blockquote>
+<p>那什么是对象呢?对象就是具有特征和行为的事物的具体实例.我们程序中对应称之为属性和方法.属性的本质就是变量,就是数据.方法的本质就是函数.</p>
+<h2 id="OO_u7F16_u7A0B"><a href="#OO_u7F16_u7A0B" class="headerlink" title="OO编程"></a>OO编程</h2><p>面向对象英文全称Object Oriented,简称: OO .包括OOA(面向对象分析 Object Oriented Analysis)、OOD(面向对象设计 Object Oriented Design) 和 OOP(面向对象编程 Object Oriented Programming).OOP只是对应面向对象的语法,是OO的一部分.<br></p>
+<p>一个典型的 OO 编程过程应该是先整理需求,根据需求进行 OOA,将真实世界的客观物件抽象成程序中的类或对象,这个过程我们称之为<a href="http://baike.baidu.com/link?url=gqVyRcXm0Qr-fukx04-f2jrgCdDLg1qQFUDx1g2oBFYXFIMNaJddCFljbYuh9udnrHvlZQL1Q5diXTBSART34K" target="_blank" rel="external">UML建模</a>. OOA的输出结果是一个个类或对象的模型图.接下来要进行 OOD,这一步的目的是处理类之间的耦合关系,设计类或对象的接口,此时会用到各种设计模式.OOA 和 OOD是一个反复迭代的过程,他们本身也没有清晰的界限.<strong>OOA 和 OOD 是面向对象编程的思想和具体语言无关,而OOP是面向对象编程的工具,和选用的语言相关.OOP 是 OOA 和 OOD 的底层不同的语言的语法不同,所以 OOP不同,但OOA 和 OOD与具体语言无关,一般情况下可以轻易跨语言重用.</strong><br><br>我们经常说优秀的程序是”高内聚、低耦合”的.聚合指的是把一个复杂的事物看成若干比较简单的事物的组装体,从而简化对复杂事物的描述,”高内聚”就是指对象(或类)的接口内部,对用户透明.用户不用关心过多的底层细节,只需要知道类提供了哪些接口,用户知道的底层细节缺少,对象的聚合程度越高.耦合指的是类与类之间的关联和依赖的程度,低耦合就是指类与类之间依赖的程度低,类与类通信需要关联的接口越少,耦合程度越低.很多工程师误以为高内聚、低耦合是 OOP的工作,其实不然,决定聚合和耦合程度的是OOA 和 OOD,OOA 和 OOD是工作在架构层面的,而OOP是工作在编码层面的.<strong>从大局上决定程序的品质,不是 OOP,而是 OOA和 OOD.</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/04/面相对象编程/" data-id="cildc0p8a0000m1l07t6eqol9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-jQuery浅析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/04/jQuery浅析/" class="article-date">
+  <time datetime="2016-03-04T06:39:06.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/04/jQuery浅析/">jQuery 浅析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u4EC0_u4E48_u662FjQuery"><a href="#u4EC0_u4E48_u662FjQuery" class="headerlink" title="什么是jQuery"></a>什么是jQuery</h2><p>如果你没有接触过<code>jQuery</code>(以下称为JQ),你心中最大的疑问就是:这是啥?! <br><code>JQ</code>是<code>JavaScript</code>库,是一种提高我们开发速率的工具,是对<code>JavaScript</code>(之后简称JS)耗时工作的封装.</p>
+<blockquote>
+<p>jQuery的官方宣传: jQuery是改变JavaScript编写方式的工具.</p>
+</blockquote>
+<p>##为什么要使用它<br>使用过<code>JS</code>语言的人都知道JS语法编写代码不是一件简单的工作.比如我们在完成动画实现改变<code>div</code>的大小,需要书写许多代码,<code>JQ</code>一行足以;另外,每一种浏览器都有自己的特性,兼容问题也是我们进行开发头疼的问题,但是<code>JQ</code>把这件事做了.例如,我们需要判定页面是否加载完成,支持所有浏览器的<code>JS</code>代码需要几十行,但是<code>JQ</code>一行代码搞定</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//write Code..</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//设置可以写成</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//write Code..</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>##怎么使用它</p>
+<p>###引入JQ<br>使用百度cdn</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"</span> type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>也可以下载到本地,然后进行引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"js/jquery-1.12.1.min.js"</span> type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>顺带提一下,对于JQ有两个并行的版本,一个是1.x是兼容ie6,7,8代码;另一个是2.x是不兼容ie6,7,8.</p>
+<p>###JQ的简单使用</p>
+<p>####标签<br>使用选择器获取标签 ,语法:<code>$(&quot;选择器&quot;)</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">	<span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">p</span>&gt;</span>我是一个p<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//例如以上代码 如果我想改变"我是一个p"文字颜色,  使用原生JS需要多行代码,使用JQ就简单:</span><br><span class="line">//$("#div1 div p") 就获取对应的 p标签</span><br><span class="line">$("#div1 div p").css(&#123;"color":"red"&#125;);</span></span><br></pre></td></tr></table></figure>
+<h4 id="u4E8B_u4EF6"><a href="#u4E8B_u4EF6" class="headerlink" title="事件"></a>事件</h4><p>JQ中绑定事件的语法:<code>JQobj.on(events,[selector],[data],fun)</code></p>
+<blockquote>
+<p>events:一个或多个用空格分隔的事件类型和可选的命名空间，如”click”或”keydown.myPlugin” 。<br><br>selector:一个选择器字符串用于过滤器的触发事件的选择器元素的后代。如&gt;果选择的&lt; null或省略，当它到达选定的元素，事件总是触发。<br><br>data:当一个事件被触发时要传递event.data给事件处理函数。<br><br>fn:该事件被触发时执行的函数。 false 值也可以做一个函数的简写，返回false。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们给btn1绑定点击事件</span></span><br><span class="line">$(<span class="string">"#btn1"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="string">"点击"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>####动画实现<br>JQ中动画的语法:<code>animate(params,[speed],[easing],[fn])</code></p>
+<blockquote>
+<p>params:一组包含作为动画属性和终值的样式属性和及其值的集合<br><br>speed:三种预定速度之一的字符串(“slow”,”normal”, or “fast”)或表示动画时&gt;长的毫秒数值(如：1000)<br><br>easing:要使用的擦除效果的名称(需要插件支持).默认jQuery提供”linear” 和 &gt;”swing”.<br><br>fn:在动画完成时执行的函数，每个元素执行一次。<br></p>
+</blockquote>
+<p>最开始我们提到JQ很容易动画实现改变大小的效果,我们来看一下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//点击页面 #div1 变大</span></span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$(<span class="string">"#div1"</span>).animate(&#123;</span><br><span class="line">		<span class="string">"width"</span>:<span class="string">"200px"</span>,</span><br><span class="line">		<span class="string">"height"</span>:<span class="string">"200px"</span></span><br><span class="line">	&#125;,<span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww4.sinaimg.cn/large/005H5abHgw1f1kndm4hy7g30d0096mxg.gif" alt="效果:"></p>
+<p><a href="http://jquery.cuishifeng.cn/index.html" target="_blank" rel="external">更多JQ使用:http://jquery.cuishifeng.cn/index.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/04/jQuery浅析/" data-id="cildc0p8m0001m1l0tfu3hs4b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JavaScript语法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/01/21/JavaScript语法/" class="article-date">
-  <time datetime="2016-01-21T07:21:44.000Z" itemprop="datePublished">2016-01-21</time>
+  <time datetime="2016-01-21T07:37:38.000Z" itemprop="datePublished">2016-01-21</time>
 </a>
     
   </div>
@@ -139,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/21/JavaScript语法/" data-id="cijnxkvh90003vrl0hnvqiq8t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/21/JavaScript语法/" data-id="cildc0p8u0005m1l016xb4n8p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -152,7 +520,7 @@
     <article id="post-DOM" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/01/21/DOM/" class="article-date">
-  <time datetime="2016-01-21T07:21:25.000Z" itemprop="datePublished">2016-01-21</time>
+  <time datetime="2016-01-21T07:25:23.000Z" itemprop="datePublished">2016-01-21</time>
 </a>
     
   </div>
@@ -243,7 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/21/DOM/" data-id="cijnxkvhc0005vrl0ftoxl4x2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/21/DOM/" data-id="cildc0p900008m1l0gaatsez9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -314,7 +682,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/14/JavaScript预热/" data-id="cijnxkvh70002vrl02ofslrls" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/14/JavaScript预热/" data-id="cildc0p8r0004m1l0bmnago53" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,7 +727,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/08/hello-world/" data-id="cijnxkvgq0000vrl04iwlajxj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/08/hello-world/" data-id="cildc0p8o0002m1l0gc0hfmik" class="article-share-link">Share</a>
       
       
     </footer>
@@ -399,7 +767,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/01/div和span/" data-id="cijnxkvh40001vrl0k923i7m8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/01/div和span/" data-id="cildc0p8q0003m1l0squvxrl9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -474,7 +842,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/20/HTML5 历史/" data-id="cijnxkvhb0004vrl07p6q62ex" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/20/HTML5 历史/" data-id="cildc0p8y0007m1l0n6fcjs00" class="article-share-link">Share</a>
       
       
     </footer>
@@ -499,7 +867,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -511,23 +879,23 @@
       <ul>
         
           <li>
+            <a href="/2016/03/04/JS的面相对象编程/">JS的面向对象编程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/04/面相对象编程/">从javascript 再看面向对象</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/04/jQuery浅析/">jQuery 浅析</a>
+          </li>
+        
+          <li>
             <a href="/2016/01/21/JavaScript语法/">JavaScript预热(二)</a>
           </li>
         
           <li>
             <a href="/2016/01/21/DOM/">DOM</a>
-          </li>
-        
-          <li>
-            <a href="/2016/01/14/JavaScript预热/">JavaScript预热(一)</a>
-          </li>
-        
-          <li>
-            <a href="/2016/01/08/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2016/01/01/div和span/">div与span</a>
           </li>
         
       </ul>

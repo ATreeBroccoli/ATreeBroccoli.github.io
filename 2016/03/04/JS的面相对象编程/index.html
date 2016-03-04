@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS的面向对象编程 | 西·兰·花</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="类的定义一般的面向对象语言比如Java、C++、OC等都是有类Class,定义类再通过类创建对象.例如Java中:
+
+//定义Person类public class Person{
+   String _name;   String _sex;
+   public Person(String name , String sex){
+   _name = name;   _sex  = sex;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS的面向对象编程">
+<meta property="og:url" content="http://yoursite.com/2016/03/04/JS的面相对象编程/index.html">
+<meta property="og:site_name" content="西·兰·花">
+<meta property="og:description" content="类的定义一般的面向对象语言比如Java、C++、OC等都是有类Class,定义类再通过类创建对象.例如Java中:
+
+//定义Person类public class Person{
+   String _name;   String _sex;
+   public Person(String name , String sex){
+   _name = name;   _sex  = sex;">
+<meta property="og:updated_time" content="2016-03-04T06:40:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS的面向对象编程">
+<meta name="twitter:description" content="类的定义一般的面向对象语言比如Java、C++、OC等都是有类Class,定义类再通过类创建对象.例如Java中:
+
+//定义Person类public class Person{
+   String _name;   String _sex;
+   public Person(String name , String sex){
+   _name = name;   _sex  = sex;">
+  
+    <link rel="alternative" href="/atom.xml" title="西·兰·花" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">西·兰·花</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS的面相对象编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/04/JS的面相对象编程/" class="article-date">
+  <time datetime="2016-03-04T06:40:21.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS的面向对象编程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u7C7B_u7684_u5B9A_u4E49"><a href="#u7C7B_u7684_u5B9A_u4E49" class="headerlink" title="类的定义"></a>类的定义</h2><p>一般的面向对象语言比如Java、C++、OC等都是有类Class,定义类再通过类创建对象.例如Java中:</p>
+<blockquote>
+<p>//定义Person类<br><br>public class Person{</p>
+<p>   String _name;<br><br>   String _sex;</p>
+<p>   public Person(String name , String sex){</p>
+<p>   _name = name;<br><br>   _sex  = sex;     </p>
+<p>}</p>
+<p>   public void say(){</p>
+<p>   System.out.println(“我是” + _name + “你们好啊!”);</p>
+<p>}</p>
+<p>}</p>
+<p>//实例化Person 对象<br><br>Person per = new Person(“张三”,”男”);</p>
+<p>//打招呼<br><br>per.say();</p>
+</blockquote>
+<p>但是对于JavaScript没有Class,在JavaScript中是用函数来充当类.也就是说JavaScript中的函数有两个作用:1.当做普通函数使用;2.当做类来使用,在充当类的时候,我们又称之为构造函数.例如:</p>
+<blockquote>
+<p>//普通函数<br><br>function sayHi(){</p>
+<p>   alert(“hi,你们好啊!”);</p>
+<p>}</p>
+<p>//调用函数<br><br>sayHi();</p>
+<p>//构造函数(类)<br>function Person(name){</p>
+<p>   this.name = name;</p>
+<p>   this.sayHi = function(){</p>
+<p>   alert(“我是” + this.name + “你们好啊!”);</p>
+<p>}</p>
+<p>}</p>
+<p>//构造函数实例化对象<br><br>var per = new Person(“张三”);</p>
+<p>//对象调用方法<br><br>per.sayHi();</p>
+</blockquote>
+<p>当函数作为普通函数使用时,通常使用函数名+”()”进行函数的调用.而作为构造函数(类)使用时,通常使用 new + 构造函数名 + “()”进行对象的实例化.另外,我们习惯上将构造函数的函数名首字母大写.<br><br>再后头看下Java中的类和对象的使用,我们发现JavaScript 和 Java 两者只是类的定义方式上有些差异.<br></p>
+<h2 id="u539F_u578B"><a href="#u539F_u578B" class="headerlink" title="原型"></a>原型</h2><p>JavaScript是基于原型的语言,通过new实例化出来的对象,其属性和行为来自于两个部分,一部分来自于构造函数,另一部分来自于原型.那么什么是原型?<br><br>当我们声明一个类时,其实同时生成了一个对应的原型,例如我们定义Person这个类时,会产生一个与Person类对应的原型,通过prototype可以指向这个原型,原型可以通过constructor指向Person类(构造函数).</p>
+<blockquote>
+<p>//定义学生类的构造函数<br><br>function Student(name){</p>
+<p>   this.name = name;</p>
+<p>   …</p>
+<p>}</p>
+<p>var stu = new Student(“张三”);<br><br>//a 指向Student类对应的原型<br><br>var a = Student.prototype; </p>
+<p>//b指向a对应的类的构造函数<br><br>var b = a.constructor;</p>
+</blockquote>
+<p>当new Student()的时候,返回的Studnet实例会结合构造函数中定义的属性和方法、原型中的属性和方法,生成最终的属于Student实例的属性和方法.但是需要注意的是,构造函数中定义的属性和方法的优先级要比原型中的要高;也就是说如果构造函数和原型中定义了同名的属性或者活动,构造函数中的属性或者方法会覆盖原型中的属性或者方法.</p>
+<p>原型的使用实例:</p>
+<blockquote>
+<p>//定义Person类 <br><br>function Person(){</p>
+<p>}</p>
+<p>//修改Person的原型<br>Person.prototype={</p>
+<p>   name:”张三”,<br><br>   sex:”男”,<br><br>   say : function(){</p>
+<p>   alert(“我是:” + name + “”);<br><br>}</p>
+<p>}</p>
+</blockquote>
+<p>原型是一个hash对象,所以我们也可以把它写成代码清单的形式:</p>
+<blockquote>
+<p>//修改Person类的原型<br><br>Person.prototype.name = “李四”;<br><br>Person.prototype.sex = “女”<br><br>Person.prototype.say = function(){</p>
+<p>   alert(“你好啊”);</p>
+<p>}</p>
+</blockquote>
+<p>一般来说,我们习惯上把属性放在构造函数里,而不是放在原型里,方便从构造函数里接收参数,例如:</p>
+<blockquote>
+<p>//定义Person类 放入函数中<br><br>function Person(name){</p>
+<p>   this.name = name;    </p>
+<p>}</p>
+<p>//修改原型<br><br>Person.prototype = {</p>
+<p>   say:function(){</p>
+<p>   alert(this.name);<br>}</p>
+<p>}</p>
+<p><strong>注意:不管是构造函数中的this,还是原型中的this都是指向实例对象</strong></p>
+</blockquote>
+<h2 id="u516C_u6709_u548C_u79C1_u6709"><a href="#u516C_u6709_u548C_u79C1_u6709" class="headerlink" title="公有和私有"></a>公有和私有</h2><p>javascript不像其他面向对象语言会有public、protected、private等关键字进行公有和私有的区分,是通过作用域实现的.例如:</p>
+<blockquote>
+<p>//定义Person类<br><br>function Person(name,sex){</p>
+<p>//公有属性<br><br>   this.name = name;<br><br>   this.sex = sex;</p>
+<p>//私有属性<br><br>   var age = 20;</p>
+<p>//公有方法<br><br>this.sayHi = function (){</p>
+<p>   alert(“hello!”);<br>}    </p>
+<p>//私有的方法<br><br>var skill = function(){</p>
+<p>   alert(“我有超级必杀技!”);<br>}</p>
+<p>}</p>
+<p>//实例化对象<br><br>var per = new Person(“张三”,”男”);</p>
+<p>alert(per.name);  //张三<br><br>alert(per.age);   //undefined <br><br>per.sayHi();      //hello!<br>per.skill();      //报错 per.skill is not a function</p>
+</blockquote>
+<p>其实,在构造函数或者原型中使用this.xxx定义的属性是公有的,而用var xxx定义的属性是私有的.那么对于私有的属性或者方法怎么去访问呢?我们使用公有的方法去访问私有的属性或者方法. 比如对于私有的属性我们会通过set方法和get方法进行属性的访问.</p>
+<blockquote>
+<p>//比如对上面的Person类,我们是无法从外界访问到私有的变量age的<br><br>//我们可以实现一个公有的方法<br><br>function Person(name,sex){</p>
+<p>//公有属性<br><br>   this.name = name;<br>   this.sex = sex;</p>
+<p>//私有属性<br><br>   var _age = 20;</p>
+<p>//公有的方法<br><br>//set方法<br>this.setAge = function(age){</p>
+<p>//判定年龄是否合法<br><br>   if(age &lt; 0){</p>
+<p>   alert(“年龄不合法!”);</p>
+<p>} else {</p>
+<p>   _age = age;</p>
+<p>}</p>
+<p>}</p>
+<p>//get方法</p>
+<p>this.getAge = function(){</p>
+<p>   return _age;</p>
+<p>}<br>}</p>
+</blockquote>
+<p>set方法也可以帮我们解决我们需要监听属性变化的问题.</p>
+<blockquote>
+<pre><code>function Student(name,age){
+
+    //私有的属性
+    var _name = name;
+    var _age = age;
+    this.setName = function(name){
+        _name = name;
+
+        //触发方法
+        this.changeHandler(&quot;name&quot;);
+    }
+    this.getName = function(){
+        return _name;
+    }
+
+    this.setAge = function(age){
+        _age = age;
+
+        //触发方法
+        this.changeHandler(&quot;age&quot;);
+    }
+    this.getAge = function(){
+        return _age;
+    }
+
+}
+
+Student.prototype = {
+    //注册监听方法
+    registFunction:function(valueName,func){
+        //添加对应的属性  为监听列表
+        this[valueName + &quot;ChangeHandler&quot;] = this[valueName +&quot;ChangeHandler&quot;] || [];
+        //将监听的对应方法 放入监听列表中
+        this[valueName+&quot;ChangeHandler&quot;].push(func);
+    },
+    changeHandler : function(valueName){
+
+        //获取对应的监听属性列表
+        var methods = this[valueName + &quot;ChangeHandler&quot;];
+        //遍历对应的属性监听列表
+        if (methods){
+
+            for(var i = 0, n = methods.length; i &lt; n ; i++){
+                //调用属性监听方法
+                methods[i]();
+            }
+        }
+
+    }
+}
+
+//创建实例对象
+var stu = new Student(&quot;张三&quot;,&quot;20&quot;);
+
+//注册监听方法
+stu.registFunction(&quot;name&quot;,function(){
+
+    alert(&quot;改变姓名&quot;);
+});
+//触发方法
+stu.setName(&quot;李四&quot;);
+</code></pre></blockquote>
+<h2 id="u7EE7_u627F"><a href="#u7EE7_u627F" class="headerlink" title="继承"></a>继承</h2><p>对于传统的面向对象语言都会提供extend之类的方法用于处理类的继承,但JavaScript并不提供extend方法,在JavaScript中使用继承需要点技巧.<br><strong>注:JavaScript中继承主要分成两个部分,构造函数和原型</strong><br>还以Person和Student为例:</p>
+<blockquote>
+<pre><code>//Person类        
+function Person(name) {
+    this.name = name;
+    this.say = function() {
+        alert(&quot;Hello&quot;);
+    }
+}
+//原型
+Person.prototype = {
+        run: function() {
+            alert(&quot;run!&quot;);
+        }
+    }
+    //学生类
+    //构造函数的继承
+function Student(name) {
+    //通过call确定this
+    Person.call(this, name);
+}
+//原型继承
+Student.prototype = new Person();
+Student.prototype.constructor = Student;
+//实例化学生对象
+var stu = new Student(&quot;张三&quot;);
+alert(stu.name);
+stu.say();  //Hello
+stu.run();  //run
+</code></pre></blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/04/JS的面相对象编程/" data-id="cildc0p8v0006m1l0nxn742tp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/04/面相对象编程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">从javascript 再看面向对象</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/04/JS的面相对象编程/">JS的面向对象编程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/04/面相对象编程/">从javascript 再看面向对象</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/04/jQuery浅析/">jQuery 浅析</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/21/JavaScript语法/">JavaScript预热(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/21/DOM/">DOM</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 西·兰·花<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

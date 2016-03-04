@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从javascript 再看面向对象 | 西·兰·花</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="面向过程编程和面向对象编程面向过程的思维方式就是典型的计算机思维方式:输入数据给处理器,处理器内部执行,处理器返回结果.这样的思维方式很好理解,就是一步一步去完成任务.在我们进行开发时我们只需要进行对应功能的函数实现和调用即可,但是这样会造成一些问题:
+
+1.我们的工作量会非常大,因为我们不仅需要需要关心数据还需要关心处理数据的函数.并且数据和数据之间的内在联系.
+2.数据和处理函数没有共有和私有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从javascript 再看面向对象">
+<meta property="og:url" content="http://yoursite.com/2016/03/04/面相对象编程/index.html">
+<meta property="og:site_name" content="西·兰·花">
+<meta property="og:description" content="面向过程编程和面向对象编程面向过程的思维方式就是典型的计算机思维方式:输入数据给处理器,处理器内部执行,处理器返回结果.这样的思维方式很好理解,就是一步一步去完成任务.在我们进行开发时我们只需要进行对应功能的函数实现和调用即可,但是这样会造成一些问题:
+
+1.我们的工作量会非常大,因为我们不仅需要需要关心数据还需要关心处理数据的函数.并且数据和数据之间的内在联系.
+2.数据和处理函数没有共有和私有">
+<meta property="og:updated_time" content="2016-03-04T06:39:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从javascript 再看面向对象">
+<meta name="twitter:description" content="面向过程编程和面向对象编程面向过程的思维方式就是典型的计算机思维方式:输入数据给处理器,处理器内部执行,处理器返回结果.这样的思维方式很好理解,就是一步一步去完成任务.在我们进行开发时我们只需要进行对应功能的函数实现和调用即可,但是这样会造成一些问题:
+
+1.我们的工作量会非常大,因为我们不仅需要需要关心数据还需要关心处理数据的函数.并且数据和数据之间的内在联系.
+2.数据和处理函数没有共有和私有">
+  
+    <link rel="alternative" href="/atom.xml" title="西·兰·花" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">西·兰·花</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-面相对象编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/04/面相对象编程/" class="article-date">
+  <time datetime="2016-03-04T06:39:29.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从javascript 再看面向对象
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u9762_u5411_u8FC7_u7A0B_u7F16_u7A0B_u548C_u9762_u5411_u5BF9_u8C61_u7F16_u7A0B"><a href="#u9762_u5411_u8FC7_u7A0B_u7F16_u7A0B_u548C_u9762_u5411_u5BF9_u8C61_u7F16_u7A0B" class="headerlink" title="面向过程编程和面向对象编程"></a>面向过程编程和面向对象编程</h2><p>面向过程的思维方式就是典型的计算机思维方式:输入数据给处理器,处理器内部执行,处理器返回结果.这样的思维方式很好理解,就是一步一步去完成任务.在我们进行开发时我们只需要进行对应功能的函数实现和调用即可,但是这样会造成一些问题:</p>
+<blockquote>
+<p>1.我们的工作量会非常大,因为我们不仅需要需要关心数据还需要关心处理数据的函数.并且数据和数据之间的内在联系.</p>
+<p>2.数据和处理函数没有共有和私有之分,在程序中交错在一起,耦合性很高,任何一个处理函数和数据的更改都有可能关联到其他地方,牵一发而动全身,从而加大了修改的难度.</p>
+<p>3.因为在生活中,存在的都是一个个具体的事物(对象),我们已经习惯生活中解决问题的思维方式,当工程项目庞大的时候我们更希望以我们习惯的方式去解决.</p>
+</blockquote>
+<p>那什么是面向对象编程呢?面向对象编程就是抛开计算机思维,使用生活中的思维方式进行的编程方式.生活中,每一件事物都有自己的状态和行为.比如,一个人他有姓名,性别,年龄等等静态特征;他能吃,能跑,能说话…等等动态行为.我们陌生人见面,会自我介绍;熟人相见会互相打招呼.而这些特征和行为不会因为不打招呼而不存在.这就是生活中具体人的对象.但是如果以面向过程语言我们很难描述.因为面向过程是在描述一个个动作,有动作的起点,也有动作的终点.可我们对象是一个客观存在事物,没有起点,没有终点.另外,每一个人都会有自己的秘密,即数据的私有性.</p>
+<p>对于两种编程方式,有一个经典比喻:面向过程编程程序的耦合关系就像是一个老旧的半导体收音机,整个收音机线路错综复杂地交织在一起,形成一个不可分割的整体,如果哪一个部分坏了,整个收音机就报废了;面向对象编程程序的耦合关系就像是一台先进的计算机,计算机由一系列的零件组装而成,有硬盘、内存、屏幕、声卡等,每个零件都是相互独立的,通过接口连接在一起形成一个整体,那一部分坏了,只需要更换对应的零件,其他零件可以不受影响.</p>
+<p>我们来看一个例子:(张三打招呼)</p>
+<p>面向过程编程</p>
+<blockquote>
+<p>var name = “zhangSan”;</p>
+<p>var sayHello = function(name){</p>
+<p>   alert(“我是”+name+”,你们好啊”);</p>
+<p>   }</p>
+<p>sayHello(name);   //我是zhangSan,你们好啊</p>
+<p>var sayEat = function(){</p>
+<p>   alert(“我在吃饭!”);   </p>
+<p>  }</p>
+<p>sayEat(); //我在吃饭!</p>
+</blockquote>
+<p>面向对象</p>
+<blockquote>
+<p>var zhangSan = {</p>
+<p>  name:”zhangSan”,</p>
+<pre><code>sayHello:function(){
+</code></pre><p>  alert(“我是”+this.name+”,你们好啊!”);</p>
+<p>  }</p>
+<p>  eat:function(){</p>
+<p>   alert(“我在吃饭!”);</p>
+<p>   },</p>
+<p>}</p>
+<p>zhangSan.sayHello();    //我是zhangSan,你们好啊</p>
+<p>zhangSan.eat();       //我在吃饭!</p>
+</blockquote>
+<p>在我们程序中这样描述面向过程编程和面向对象编程:</p>
+<blockquote>
+<p>面向过程编程:注重解决问题的步骤,分析问题需要的每一步,实现函数依次调用.<br><br>面向对象编程:注重问题中的的对象,分析问题中对象的联系,实现对象间的通讯解决问题.</p>
+</blockquote>
+<p>那什么是对象呢?对象就是具有特征和行为的事物的具体实例.我们程序中对应称之为属性和方法.属性的本质就是变量,就是数据.方法的本质就是函数.</p>
+<h2 id="OO_u7F16_u7A0B"><a href="#OO_u7F16_u7A0B" class="headerlink" title="OO编程"></a>OO编程</h2><p>面向对象英文全称Object Oriented,简称: OO .包括OOA(面向对象分析 Object Oriented Analysis)、OOD(面向对象设计 Object Oriented Design) 和 OOP(面向对象编程 Object Oriented Programming).OOP只是对应面向对象的语法,是OO的一部分.<br></p>
+<p>一个典型的 OO 编程过程应该是先整理需求,根据需求进行 OOA,将真实世界的客观物件抽象成程序中的类或对象,这个过程我们称之为<a href="http://baike.baidu.com/link?url=gqVyRcXm0Qr-fukx04-f2jrgCdDLg1qQFUDx1g2oBFYXFIMNaJddCFljbYuh9udnrHvlZQL1Q5diXTBSART34K" target="_blank" rel="external">UML建模</a>. OOA的输出结果是一个个类或对象的模型图.接下来要进行 OOD,这一步的目的是处理类之间的耦合关系,设计类或对象的接口,此时会用到各种设计模式.OOA 和 OOD是一个反复迭代的过程,他们本身也没有清晰的界限.<strong>OOA 和 OOD 是面向对象编程的思想和具体语言无关,而OOP是面向对象编程的工具,和选用的语言相关.OOP 是 OOA 和 OOD 的底层不同的语言的语法不同,所以 OOP不同,但OOA 和 OOD与具体语言无关,一般情况下可以轻易跨语言重用.</strong><br><br>我们经常说优秀的程序是”高内聚、低耦合”的.聚合指的是把一个复杂的事物看成若干比较简单的事物的组装体,从而简化对复杂事物的描述,”高内聚”就是指对象(或类)的接口内部,对用户透明.用户不用关心过多的底层细节,只需要知道类提供了哪些接口,用户知道的底层细节缺少,对象的聚合程度越高.耦合指的是类与类之间的关联和依赖的程度,低耦合就是指类与类之间依赖的程度低,类与类通信需要关联的接口越少,耦合程度越低.很多工程师误以为高内聚、低耦合是 OOP的工作,其实不然,决定聚合和耦合程度的是OOA 和 OOD,OOA 和 OOD是工作在架构层面的,而OOP是工作在编码层面的.<strong>从大局上决定程序的品质,不是 OOP,而是 OOA和 OOD.</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/04/面相对象编程/" data-id="cildc0p8a0000m1l07t6eqol9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/04/JS的面相对象编程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS的面向对象编程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/04/jQuery浅析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">jQuery 浅析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/04/JS的面相对象编程/">JS的面向对象编程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/04/面相对象编程/">从javascript 再看面向对象</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/04/jQuery浅析/">jQuery 浅析</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/21/JavaScript语法/">JavaScript预热(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/21/DOM/">DOM</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 西·兰·花<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
